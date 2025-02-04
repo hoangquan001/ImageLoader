@@ -1,13 +1,26 @@
 module.exports = {
   apps: [
     {
-      name: 'I', // Tên ứng dụng
-      script: 'index.js', // Tệp chính
-      cron_restart: '0 */5 * * *', // Restart mỗi 5 tiếng
-      watch: false, // Không theo dõi tệp để tránh restart không cần thiết
-      instances: 1, // Số instance (1 là mặc định)
-      autorestart: true, // Tự động restart nếu gặp lỗi
-      max_memory_restart: '500M', // Restart nếu vượt 500MB RAM
+      name: 'App-8000', // Instance chạy trên port 8000
+      script: './index', // File binary của ứng dụng Go
+      env: {
+        PORT: 8000, // Biến môi trường để ứng dụng Go lắng nghe port 8000
+      },
+      watch: false,
+      instances: 1, // Chỉ chạy 1 instance
+      autorestart: true,
+      max_memory_restart: '500M',
+    },
+    {
+      name: 'App-8001', // Instance chạy trên port 8001
+      script: './index', // File binary của ứng dụng Go
+      env: {
+        PORT: 8001, // Biến môi trường để ứng dụng Go lắng nghe port 8001
+      },
+      watch: false,
+      instances: 1,
+      autorestart: true,
+      max_memory_restart: '500M',
     },
   ],
 };
