@@ -58,15 +58,12 @@ func proxyHandler(w http.ResponseWriter, r *http.Request) {
 	// Thiết lập các header giống như trong phiên bản Node.js
 	req.Header.Set("Accept", "*/*")
 	req.Header.Set("User-Agent", "Mozilla/5.0 (Windows NT 6.2; Win64; x64; en-US) Gecko/20130401 Firefox/53.5")
+	req.Header.Set("Referer", "nettruyenar.com")
 
 	parsedURL, _ := url.Parse(string(decodedURL))
-
 	referer := parsedURL.Query().Get("referer")
-
 	if referer != "" {
 		req.Header.Set("Referer", referer)
-	} else {
-		req.Header.Set("Referer", "nettruyenrr.com")
 	}
 
 	resp, err := client.Do(req)
